@@ -20,8 +20,8 @@ class User(Base):
     name = Column(String(200), nullable=False)
     email = Column(String(200), unique=True, nullable=False)
     password = Column(String(255), nullable=False)
-    reset_otp = Column(String, nullable=True)
-    otp_expiry = Column(DateTime, nullable=True)
+    reset_otp = Column(String(10), nullable=True)
+    otp_expiry = Column(DateTime(30), nullable=True)
 
 
     # NEW - one-to-one relationship
