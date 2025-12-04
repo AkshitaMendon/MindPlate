@@ -33,9 +33,10 @@ interface Props {
 }
 
 export default function MealPlanGenerator({ navigation, userProfile }: Props) {
-  const [condition, setCondition] = useState(userProfile.mentalHealthCondition)
+  // const [condition, setCondition] = useState(userProfile.mentalHealthCondition)
+  const condition = userProfile.mentalHealthCondition;
   const [calorieTarget, setCalorieTarget] = useState("")
-  const [showConditionPicker, setShowConditionPicker] = useState(false)
+  // const [showConditionPicker, setShowConditionPicker] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
 
   const handleGenerate = async () => {
@@ -102,59 +103,22 @@ export default function MealPlanGenerator({ navigation, userProfile }: Props) {
 
           {/* Form Card */}
           <View style={styles.card}>
-            {/* Mental Health Focus */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Mental Health Focus</Text>
-              <TouchableOpacity
-                style={styles.selectButton}
-                onPress={() => setShowConditionPicker(!showConditionPicker)}
-              >
-                <Text style={condition ? styles.selectText : styles.selectPlaceholder}>
-                  {condition ? condition.charAt(0).toUpperCase() + condition.slice(1) : "Select condition"}
-                </Text>
-              </TouchableOpacity>
-
-              {showConditionPicker && (
-                <View style={styles.pickerContainer}>
-                  <TouchableOpacity
-                    style={styles.pickerItem}
-                    onPress={() => {
-                      setCondition("anxiety")
-                      setShowConditionPicker(false)
-                    }}
-                  >
-                    <Text style={styles.pickerItemText}>Anxiety</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.pickerItem}
-                    onPress={() => {
-                      setCondition("stress")
-                      setShowConditionPicker(false)
-                    }}
-                  >
-                    <Text style={styles.pickerItemText}>Stress</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.pickerItem}
-                    onPress={() => {
-                      setCondition("depression")
-                      setShowConditionPicker(false)
-                    }}
-                  >
-                    <Text style={styles.pickerItemText}>Depression</Text>
-                  </TouchableOpacity>
-                  {/* <TouchableOpacity
-                    style={styles.pickerItem}
-                    onPress={() => {
-                      setCondition("general")
-                      setShowConditionPicker(false)
-                    }}
-                  >
-                    <Text style={styles.pickerItemText}>General Wellness</Text>
-                  </TouchableOpacity> */}
-                </View>
-              )}
+          {/* Mental Health Focus (read-only) */}
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Mental Health Focus</Text>
+            <View style={styles.selectButton /* reuse the styling, but no onPress */}>
+              <Text style={condition ? styles.selectText : styles.selectPlaceholder}>
+                {condition
+                  ? condition.charAt(0).toUpperCase() + condition.slice(1)
+                  : "Not set"}
+              </Text>
             </View>
+
+            <Text style={styles.helperText}>
+              To change this, update your profile in Settings.
+            </Text>
+          </View>
+
 
             {/* BMI Display */}
             <View style={styles.inputGroup}>
@@ -230,6 +194,11 @@ const styles = StyleSheet.create({
   },
   headerTextContainer: {
     gap: 4,
+  },
+  helperText:{
+    fontSize:12,
+    color: "#6b7280",
+    marginTop:4,
   },
   title: {
     fontSize: 24,

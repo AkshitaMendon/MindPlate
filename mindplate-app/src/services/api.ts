@@ -14,7 +14,7 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const API_BASE_URL = "http://192.168.2.17:8000"; // your backend IP
+const API_BASE_URL = "https://persuasive.research.cs.dal.ca/mindplate"; // your backend IP
 
 const api = axios.create({
   baseURL: API_BASE_URL,

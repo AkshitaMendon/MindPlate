@@ -41,33 +41,35 @@ export default function DashboardScreen({
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Today's Overview</Text>
             <View style={styles.statsContainer}>
+              {/* BMI */}
               <View style={styles.statItem}>
                 <Text style={styles.statLabel}>BMI</Text>
                 <View style={styles.statValueContainer}>
                   <Text style={styles.statValue}>{userProfile?.bmi}</Text>
-                  {/* <View style={[styles.badge, { backgroundColor: getBMIColor(userProfile?.bmiCategory) }]}>
-                    <Text style={styles.badgeText}>{userProfile?.bmiCategory}</Text>
-                  </View> */}
                 </View>
               </View>
-              <View style={styles.statItem}>
-              <Text style={styles.statLabel}>BMI Category</Text>
-              {/* <Text style={styles.statValue}>{userProfile?.bmiCategory}</Text> */}
-              <View style={[styles.badge, {backgroundColor: getBMIColor(userProfile?.bmiCategory || "")}]}>
-                <Text style={styles.badgeText}>{userProfile?.bmiCategory??"Not set"}</Text>
-                </View>
-            </View>
 
-              {/* <View style={styles.statItem}>
-                <Text style={styles.statLabel}>Current Mood</Text>
-                <View style={styles.moodContainer}>
-                  <Text style={styles.moodEmoji}>{moodEmojis[currentMood - 1]}</Text>
-                  <Text style={styles.moodLabel}>{currentMoodLabel}</Text>
+              {/* BMI Category */}
+              <View style={styles.statItem}>
+                <Text style={styles.statLabel}>BMI Category</Text>
+                <View style={[styles.badge, { backgroundColor: getBMIColor(userProfile?.bmiCategory || "") }]}>
+                  <Text style={styles.badgeText}>{userProfile?.bmiCategory ?? "Not set"}</Text>
                 </View>
-                {moodNote ? <Text style={styles.moodNote}>{moodNote}</Text> : null}
-              </View> */}
+              </View>
+
+              {/* NEW: Mental Health Condition */}
+              <View style={styles.statItem}>
+                <Text style={styles.statLabel}>Mental Health</Text>
+                <Text style={styles.statValue}>
+                  {userProfile?.mentalHealthCondition
+                    ? userProfile.mentalHealthCondition.charAt(0).toUpperCase() +
+                      userProfile.mentalHealthCondition.slice(1)
+                    : "Not set"}
+                </Text>
+              </View>
             </View>
           </View>
+
 
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Today's Meal Plan</Text>
